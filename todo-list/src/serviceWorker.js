@@ -1,3 +1,13 @@
+// 利用缓存做PWA的脚本 （PWA:渐进式引用 Progressive Web App）
+/*
+PWA 是 Progressive Web App，一個 Google 制定的標準。
+透過 Swervice Worker 和 manifest.json，不但可以讓你的 Web App 離線運作，
+也可以新增到主畫面，讓你的網站看起來更像一個真正的手機 App，就跟 Native App 沒兩樣。
+ */
+
+// 里面主要是service worker相关的事情。
+// 包括register注册、监听一些事件、把一些请求或图片预存到本地、从一些cached storage里读取预存的东西。
+
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
@@ -6,6 +16,14 @@
 // will only see deployed updates on subsequent visits to a page, after all the
 // existing tabs open on the page have been closed, since previously cached
 // resources are updated in the background.
+
+/*
+此可选代码用于注册服务工作者。 默认情况下不调用register（）。
+
+这使应用程序在生产中的后续访问中加载速度更快，并具有离线功能。 
+但是，这也意味着开发人员（和用户）仅在关闭页面上打开的所有现有选项卡之后，
+在后续访问页面时才会看到已部署的更新，因为先前缓存的资源会在后台更新。
+*/
 
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
@@ -26,7 +44,7 @@ export function register(config) {
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
     if (publicUrl.origin !== window.location.origin) {
       // Our service worker won't work if PUBLIC_URL is on a different origin
-      // from what our page is served on. This might happen if a CDN is used to
+      // from what our page is served on. This might happen if a CDN（content delivery network） is used to
       // serve assets; see https://github.com/facebook/create-react-app/issues/2374
       return;
     }
