@@ -1,0 +1,13 @@
+.app {
+    /* 目标：一个延伸到整个页面的黑色背景；内容居中 */
+    background-color: #000;
+    padding: 30px;
+    height: 100vh; /*撑满视窗*/
+    display: flex;
+    justify-content: center; /*居中*/
+}
+
+.todo-list {
+    /* 目标：限定一下宽度 */
+    width: 600px;
+}
