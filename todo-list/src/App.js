@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import './App.css'
 
-function TodoForm() {
-  // 组件1：表单（输入）的组件。
-  // 利用state来存取值，而不是用getelementbyid
-  // HTML form标签，用于向服务器传输数据。 它包含的可以不只是一个input。
-  //                它有一个onsubmit event来提交表单。可以定制它。
+// 创建一个初始的todo列表，展示它
+const INIT_TODOS = [ 
+  'learn react',
+  'meet cat',
+  'build todo project',
+]
 
-  const [content, setValue] = useState('123');
+function TodoForm({addTodo}) { // 组件：表单（输入）
+  // 逻辑部分
+  const [content, setContent] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();// 阻止后续默认行为
-    console.log(content);// 提交表单时log一下值
+    if (!content) return; // 空输入框提交时不建立新待做项
+    addTodo(content);
+    setContent('') // 提交后清空输入框
   }
-
+  // 返回的结构部分
   return (
     <form onSubmit={handleSubmit}>
       <input
@@ -22,19 +27,39 @@ function TodoForm() {
         placeholder="Text input"
         onChange={
           (e) => {
-            setValue(e.target.value)
+            setContent(e.target.value)
           }
-        } //把event参数中的值，setvalue到state的值里。
+        } //把event参数中的值，setContent到state的值里。
       />
     </form>
   );
 }
 
+function Todo({ todoValue }) { // 组件：每个待做项
+  // 逻辑部分
+  console.log(todoValue)
+  // 返回的结构部分
+  return(
+    <div className="todo">{todoValue}</div>
+  )
+}
+
 function App() {
+  // 逻辑部分
+  const [todos, setTodos] = useState(INIT_TODOS)
+  const addTodo = (text) => {
+    setTodos([text, ...todos])
+  }
+  // 返回的结构部分
   return (
     <div className="app"> {/* 整个App的容器 */}
       <div className="todo-list"> {/* todo-list的容器 */}
-        <TodoForm />
+        <TodoForm addTodo = {addTodo}/>
+        {
+          todos.map((todo)=>( 
+            <Todo todoValue = {todo}></Todo>
+          ))
+        }
       </div>
     </div>
   );
