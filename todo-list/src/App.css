@@ -20,9 +20,30 @@
     /* 水平、竖直相对位置，模糊边缘大小，（扩展大小），颜色 */
     padding: 5px 10px;
     margin: 5px 0px;
-    /* 上下、左右 */
+    border-radius: 5px;
+    /* margin 上下、左右 */
     color: #fff;
     height: 48px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.task {
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+}
+
+.remove {
+    display: none;
+}
+
+.todo:hover .remove {
+    display: block;
+}
+
+.icon {
+    margin-right: 10px;
 }
